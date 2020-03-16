@@ -41,18 +41,12 @@ function JogoDaVelha() {
       ];
   
     possibleWaysToWin.forEach(cells => {
-      if (cells.every(cell => cell === "O")) setWinner ("O")
-      if (cells.every(cell => cell === "X")) setWinner ("X")
-      });
+      if (cells.every(cell => cell === "O")) setWinner ("O Ganhou!")
+      if (cells.every(cell => cell === "X")) setWinner ("X Ganhou!")
+      if (board.every(item => item !== "")) setWinner ("Empatou!")
+    });
 
-    checkDraw();
   }
-
-  const checkDraw = () => {
-    if (board.every(item => item !== "")){
-      //quando o jogo empata
-      setWinner ("E");
-    }}
 
 
   useEffect(checkWinner, [board]);
@@ -67,7 +61,7 @@ function JogoDaVelha() {
     <main>
       <h1 className="title"> Jogo da velha </h1>
 
-      <div className={'board ${winner ? "game-over":""}'}>
+      <div className={'board'}>
         {board.map((item, index) => (
         <div
           key={index}
@@ -82,8 +76,9 @@ function JogoDaVelha() {
       <footer>
         {winner &&
           <h2 className="winner-message">
-            <span className={winner}>{winner}</span> Ganhou!
-          </h2>}
+            <span className={winner}>{winner}</span>
+          </h2>
+        }
           <br/>
         <button onClick={resetGame}>Recomeçar Jogo!</button>
       </footer>
